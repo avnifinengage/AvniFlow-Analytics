@@ -312,3 +312,5 @@ For support and questions:
 ---
 
 **Built with ❤️ for the Web3 community** 
+
+app.use('/public', express.static(path.join(__dirname, '../public'))); 
