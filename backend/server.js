@@ -26,6 +26,9 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB connected successfully'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
+app.use('/api/v1/events', eventRoutes);
+app.use('/api/v1/websites', websiteRoutes);
+
 app.get('/', (req, res) => {
   res.send('Hello World from main app');
 });
