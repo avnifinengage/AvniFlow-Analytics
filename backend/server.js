@@ -50,8 +50,8 @@ app.get('/health', (req, res) => {
 });
 
 // API routes
-app.use('/api/v1/events', eventRoutes);
-app.use('/api/v1/websites', websiteRoutes);
+// app.use('/api/v1/events', eventRoutes);
+// app.use('/api/v1/websites', websiteRoutes);
 
 // Root route
 app.get('/', (req, res) => {
