@@ -2,6 +2,8 @@
 
 A comprehensive analytics platform designed specifically for Web3 companies to track customer behavior, optimize user experience, and improve conversion rates.
 
+[Live Documentation](https://avni.fi/apps/avniflow/docs/)
+
 ## 🌟 Features
 
 ### 📊 Event Tracking
@@ -294,9 +296,9 @@ This project is licensed under the MIT License.
 ## 🆘 Support
 
 For support and questions:
-- Create an issue on GitHub
+- Create an issue on GitHub: https://github.com/avnifinengage/AvniFlow-Analytics/issues
 - Email: avniflow@avni.com
-- Documentation: (coming soon) — For now, see this GitHub repository for usage and API details
+- Documentation: https://avni.fi/apps/avniflow/docs/
 
 ## 🔮 Roadmap
 
