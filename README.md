@@ -295,8 +295,8 @@ This project is licensed under the MIT License.
 
 For support and questions:
 - Create an issue on GitHub
-- Email: support@web3funnel.com
-- Documentation: https://docs.web3funnel.com
+- Email: avniflow@avni.com
+- Documentation: (coming soon) — For now, see this GitHub repository for usage and API details
 
 ## 🔮 Roadmap
 
