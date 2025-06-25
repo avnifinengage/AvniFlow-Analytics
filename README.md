@@ -1,4 +1,4 @@
-# Web3 Funnel Analytics 🚀
+# AvniFlow Analytics 🚀
 
 A comprehensive analytics platform designed specifically for Web3 companies to track customer behavior, optimize user experience, and improve conversion rates.
 
@@ -33,7 +33,7 @@ The backend is already deployed on Render. You can also deploy it locally:
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd web3-funnel-backend-1
+cd avniflow-analytics
 
 # Install dependencies
 npm install
@@ -66,13 +66,13 @@ curl -X POST https://your-render-app.onrender.com/api/v1/websites/register \
 
 ### 3. Integrate the Widget
 
-Add the tracking widget to your website:
+Add the AvniFlow Analytics widget to your website:
 
 ```html
 <!-- Add this to your HTML head -->
 <script 
   src="https://your-render-app.onrender.com/widget.js"
-  data-web3-funnel
+  data-avniflow-analytics
   data-website-id="your-website-id"
   data-api-key="your-api-key">
 </script>
@@ -84,10 +84,10 @@ Use the JavaScript API to track custom events:
 
 ```javascript
 // Track wallet connection
-Web3Funnel.trackWalletConnect('0x1234...', 'metamask');
+AvniFlowAnalytics.trackWalletConnect('0x1234...', 'metamask');
 
 // Track transaction
-Web3Funnel.trackTransaction({
+AvniFlowAnalytics.trackTransaction({
   hash: '0xabcd...',
   from: '0x1234...',
   to: '0x5678...',
@@ -96,7 +96,7 @@ Web3Funnel.trackTransaction({
 });
 
 // Track custom event
-Web3Funnel.trackCustomEvent('nft_minted', {
+AvniFlowAnalytics.trackCustomEvent('nft_minted', {
   collection: 'Bored Apes',
   tokenId: 1234
 });
@@ -226,7 +226,7 @@ The widget can be configured with data attributes:
 ```html
 <script 
   src="https://your-render-app.onrender.com/widget.js"
-  data-web3-funnel
+  data-avniflow-analytics
   data-website-id="your-website-id"
   data-api-key="your-api-key"
   data-batch-size="10"

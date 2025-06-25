@@ -1,0 +1,101 @@
+<!-- AvniFlow Analytics Widget for AVNI (WordPress compatible) -->
+<style>
+.avniflow-widget {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: #23272e;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  max-width: 420px;
+  margin: 2rem auto;
+  border: 1px solid #3a3f47;
+  position: relative;
+}
+.avniflow-widget h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+.avniflow-widget p {
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+.avniflow-widget .avniflow-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.avniflow-widget .avniflow-card {
+  background: #23272e;
+  border: 1px solid #3a3f47;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  flex: 1 1 140px;
+  min-width: 120px;
+  text-align: center;
+}
+.avniflow-widget .avniflow-card-title {
+  font-size: 0.95rem;
+  color: #e2c178;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.avniflow-widget .avniflow-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+.avniflow-widget .avniflow-cta {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 2px solid #e2c178;
+  background: #23272e;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.avniflow-widget .avniflow-cta:hover {
+  background: #e2c178;
+  color: #23272e;
+}
+@media (max-width: 600px) {
+  .avniflow-widget { padding: 1rem; }
+  .avniflow-widget h2 { font-size: 1.3rem; }
+  .avniflow-widget .avniflow-stats { flex-direction: column; gap: 0.75rem; }
+}
+</style>
+<div class="avniflow-widget">
+  <h2>AvniFlow Analytics</h2>
+  <p>Track wallet connections, user journeys, and DeFi engagement in real time. <br> Empower your Web3 growth with actionable insights.</p>
+  <div class="avniflow-stats">
+    <div class="avniflow-card">
+      <div class="avniflow-card-title">Wallets Connected</div>
+      <div class="avniflow-card-value" id="avniflow-wallets">1,234</div>
+    </div>
+    <div class="avniflow-card">
+      <div class="avniflow-card-title">Top User Journey</div>
+      <div class="avniflow-card-value" id="avniflow-journey">Onboard → Connect → Tx</div>
+    </div>
+  </div>
+  <a class="avniflow-cta" href="#" target="_blank">Get Started</a>
+</div>
+<!-- Optionally, add a script to fetch live data from your backend API -->
+<!--
+<script>
+// Example: Fetch wallets connected from your API
+fetch('https://web3-funnel-backend.onrender.com/api/v1/websites/analytics?apiKey=YOUR_API_KEY')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('avniflow-wallets').textContent = data.data.overview.walletConnections;
+    // Update other stats as needed
+  });
+</script>
+--> 
