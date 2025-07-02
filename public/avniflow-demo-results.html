@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AvniFlow Analytics Demo Results</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f8fa; color: #222; margin: 0; }
+    .header { background: #1a237e; color: #fff; padding: 32px 0 16px 0; text-align: center; }
+    .header h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
+    .header p { margin: 8px 0 0 0; font-size: 1.2rem; }
+    .container { max-width: 1000px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 32px; }
+    .stats { display: flex; gap: 32px; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; }
+    .stat-box { background: #eceff1; border-radius: 8px; padding: 24px 32px; flex: 1; min-width: 180px; text-align: center; }
+    .stat-title { color: #3949ab; font-size: 1.1rem; margin-bottom: 8px; }
+    .stat-value { font-size: 2rem; font-weight: bold; color: #1a237e; }
+    .charts { display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; }
+    .chart-box { background: #f7f8fa; border-radius: 8px; padding: 24px; flex: 1; min-width: 320px; }
+    @media (max-width: 900px) {
+      .container { padding: 12px; }
+      .stats, .charts { flex-direction: column; gap: 16px; }
+      .chart-box { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>AvniFlow Analytics Demo Results</h1>
+    <p>See what your analytics dashboard could look like!</p>
+  </div>
+  <div class="container">
+    <div class="stats">
+      <div class="stat-box">
+        <div class="stat-title">Wallet Connections</div>
+        <div class="stat-value">1,234</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-title">Transactions</div>
+        <div class="stat-value">567</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-title">Page Views</div>
+        <div class="stat-value">8,910</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-title">Conversion Rate</div>
+        <div class="stat-value">12.3%</div>
+      </div>
+    </div>
+    <div class="charts">
+      <div class="chart-box">
+        <canvas id="walletChart" height="200"></canvas>
+      </div>
+      <div class="chart-box">
+        <canvas id="txChart" height="200"></canvas>
+      </div>
+      <div class="chart-box">
+        <canvas id="funnelChart" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+  <script>
+    const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your real API key
+    async function fetchAnalytics() {
+      const res = await fetch('/api/v1/events/analytics', {
+        headers: { 'x-api-key': API_KEY }
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+      return data;
+    }
+    function updateDashboard(data) {
+      document.getElementById('total-events').textContent = data.totalEvents;
+      // Update chart
+      const ctx = document.getElementById('eventTypeChart').getContext('2d');
+      const labels = data.eventTypeCounts.map(e => e._id);
+      const counts = data.eventTypeCounts.map(e => e.count);
+      if (window.eventTypeChartInstance) window.eventTypeChartInstance.destroy();
+      window.eventTypeChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: { labels, datasets: [{ label: 'Events by Type', data: counts }] },
+        options: { responsive: true }
+      });
+    }
+    async function loadDashboard() {
+      try {
+        const data = await fetchAnalytics();
+        updateDashboard(data);
+      } catch (e) {
+        alert('Failed to load analytics: ' + e.message);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadDashboard);
+    // Wallet Connections by Type
+    new Chart(document.getElementById('walletChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['MetaMask', 'WalletConnect', 'Coinbase', 'Other'],
+        datasets: [{
+          data: [700, 300, 150, 84],
+          backgroundColor: ['#3949ab', '#1a237e', '#43a047', '#fbc02d'],
+        }]
+      },
+      options: {
+        plugins: { legend: { position: 'bottom' } },
+        responsive: true,
+        maintainAspectRatio: false,
+        title: { display: true, text: 'Wallet Connections by Type' }
+      }
+    });
+    // Transactions Over Time
+    new Chart(document.getElementById('txChart'), {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Transactions',
+          data: [80, 95, 70, 110, 130, 60, 22],
+          borderColor: '#1a237e',
+          backgroundColor: 'rgba(26,35,126,0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        responsive: true,
+        maintainAspectRatio: false,
+        title: { display: true, text: 'Transactions Over Time' }
+      }
+    });
+    // Funnel Chart (simulated with bar)
+    new Chart(document.getElementById('funnelChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Page Views', 'Wallet Connect', 'Transaction Start', 'Transaction Complete'],
+        datasets: [{
+          label: 'Users',
+          data: [8910, 1234, 800, 567],
+          backgroundColor: ['#fbc02d', '#43a047', '#3949ab', '#1a237e'],
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        responsive: true,
+        maintainAspectRatio: false,
+        title: { display: true, text: 'Funnel Analysis' },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+  <!-- Example HTML for dashboard -->
+  <div>
+    <h2>Analytics Dashboard</h2>
+    <div>Total Events: <span id="total-events">0</span></div>
+    <canvas id="eventTypeChart" width="400" height="200"></canvas>
+  </div>
+</body>
+</html> 
